@@ -10,7 +10,3 @@
 
 [Sebastian Capotondo](https://github.com/scapotondo) 
 * Email: sebastian.capotondo@gmail.com
-
-## Contributors
-
-Have a look on [Contributors](https://github.com/scapotondo/golang-rate-limit/graphs/contributors) page.
