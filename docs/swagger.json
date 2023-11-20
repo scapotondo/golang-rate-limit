@@ -1,0 +1,16 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Golang Rate Limit API",
+        "title": "Golang Rate Limit API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "email": "sebastian.capotondo@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/v1",
+    "paths": {}
+}

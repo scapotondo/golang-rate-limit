@@ -1,0 +1,12 @@
+basePath: /v1
+host: localhost:8080
+info:
+  contact:
+    email: sebastian.capotondo@gmail.com
+    name: API Support
+  description: Golang Rate Limit API
+  termsOfService: http://swagger.io/terms/
+  title: Golang Rate Limit API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
