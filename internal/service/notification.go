@@ -1,17 +1,16 @@
 package service
 
 import (
+	"context"
 	"fmt"
 	"golang-rate-limit/internal/domain"
 	"golang-rate-limit/internal/logs"
 	"golang-rate-limit/internal/resources"
 	"sync"
-
-	"github.com/gin-gonic/gin"
 )
 
 type Notification interface {
-	SendEmail(c *gin.Context, request resources.NotificationRequest) error
+	SendEmail(c context.Context, request resources.NotificationRequest) error
 }
 
 type notification struct {
@@ -20,7 +19,7 @@ type notification struct {
 	users  map[string]*domain.NotificationRateLimit
 }
 
-func (ns *notification) SendEmail(ctx *gin.Context, request resources.NotificationRequest) error {
+func (ns *notification) SendEmail(ctx context.Context, request resources.NotificationRequest) error {
 	ns.mu.Lock()
 	defer ns.mu.Unlock()
 
