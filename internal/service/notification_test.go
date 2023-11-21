@@ -68,7 +68,7 @@ func TestSendEmail(t *testing.T) {
 		},
 		{
 			testName:    "Error status case",
-			occurencies: 2,
+			occurencies: 4,
 			request: resources.NotificationRequest{
 				Type:    "marketing",
 				User:    "user-1",
