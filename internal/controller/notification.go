@@ -19,13 +19,21 @@ type notificationController struct {
 }
 
 // Send godoc
-// @Summary Sends a notification
-// @Description  This method is useful to send an email
-// @Description Restrictions:
-// @Description - Status type: not more than 2 per minute for each recipient
-// @Tags notification
-// @Accept json
-// @Produce json
+//
+//	@Summary		Sends a notification
+//	@Description	This method is useful to send an email
+//	@Description	Restrictions:
+//	@Description	- Status type: not more than 2 per minute for each recipient
+//	@Description	- News type: not more than 1 per day for each recipient
+//	@Description	- Marketing type: not more than 1 per day for each recipient
+//	@Tags			notification
+//	@Accept			json
+//	@Produce		json
+//	@Param			request	query	resources.NotificationRequest	true	"Notification details"
+//	@Success		200
+//	@Failure		400	"Bad Request"
+//	@Failure		429	"Too many requests"
+//	@Router			/notification/:type [post]
 func (nc *notificationController) SendEmail(ctx *gin.Context) {
 	var request resources.NotificationRequest
 	if err := ctx.ShouldBind(&request); err != nil {

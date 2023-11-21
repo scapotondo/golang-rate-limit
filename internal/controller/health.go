@@ -16,6 +16,15 @@ type HealthResponse struct {
 	Status string `json:"status"`
 }
 
+// Send godoc
+//
+//	@Summary		Healthcheck for microservice
+//	@Description	This method is useful to make a healthcheck
+//	@Tags			healdh
+//	@Accept			json
+//	@Produce		json
+//	@Success		200
+//	@Router			/health [get]
 func (hh *healthController) GetPing(ctx *gin.Context) {
 	response := HealthResponse{
 		Status: "pong",

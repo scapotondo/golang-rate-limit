@@ -52,10 +52,10 @@ func (app *App) ConfigureRoutes() {
 		v1.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 		// Health
-		v1.GET(constants.PingBasePath, app.HealthController.GetPing)
+		// v1.GET(constants.PingBasePath, app.HealthController.GetPing)
 
-		// Notification
-		v1.POST(constants.NotificationBasePath+"/:type", app.NotificationController.SendEmail)
+		// // Notification
+		v1.POST(constants.NotificationBasePath, app.NotificationController.SendEmail)
 	}
 }
 

@@ -5,16 +5,16 @@ import (
 	"golang-rate-limit/internal/app"
 )
 
-// @title           Golang Rate Limit API
-// @version         1.0
-// @description     Golang Rate Limit API
-// @termsOfService  http://swagger.io/terms/
+//	@title			Golang Rate Limit API
+//	@version		1.0
+//	@description	Golang Rate Limit API
+//	@termsOfService	http://swagger.io/terms/
 
-// @contact.name   API Support
-// @contact.email  sebastian.capotondo@gmail.com
+//	@contact.name	API Support
+//	@contact.email	sebastian.capotondo@gmail.com
 
-// @host      localhost:8080
-// @BasePath  /v1
+//	@host		localhost:8080
+//	@BasePath	/v1
 
 func main() {
 	app.NewApp().

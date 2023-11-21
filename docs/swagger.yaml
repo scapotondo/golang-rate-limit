@@ -8,5 +8,59 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Golang Rate Limit API
   version: "1.0"
-paths: {}
+paths:
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: This method is useful to make a healthcheck
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Healthcheck for microservice
+      tags:
+      - healdh
+  /notification/:type:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        This method is useful to send an email
+        Restrictions:
+        - Status type: not more than 2 per minute for each recipient
+        - News type: not more than 1 per day for each recipient
+        - Marketing type: not more than 1 per day for each recipient
+      parameters:
+      - example: some message
+        in: query
+        name: message
+        required: true
+        type: string
+      - enum:
+        - news
+        - status
+        - marketing
+        example: news
+        in: query
+        name: type
+        type: string
+      - example: user-1
+        in: query
+        name: user
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "429":
+          description: Too many requests
+      summary: Sends a notification
+      tags:
+      - notification
 swagger: "2.0"

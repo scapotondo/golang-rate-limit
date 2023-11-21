@@ -12,5 +12,79 @@
     },
     "host": "localhost:8080",
     "basePath": "/v1",
-    "paths": {}
+    "paths": {
+        "/health": {
+            "get": {
+                "description": "This method is useful to make a healthcheck",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "healdh"
+                ],
+                "summary": "Healthcheck for microservice",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/notification/:type": {
+            "post": {
+                "description": "This method is useful to send an email\nRestrictions:\n- Status type: not more than 2 per minute for each recipient\n- News type: not more than 1 per day for each recipient\n- Marketing type: not more than 1 per day for each recipient",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notification"
+                ],
+                "summary": "Sends a notification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "some message",
+                        "name": "message",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "enum": [
+                            "news",
+                            "status",
+                            "marketing"
+                        ],
+                        "type": "string",
+                        "example": "news",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "user-1",
+                        "name": "user",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "429": {
+                        "description": "Too many requests"
+                    }
+                }
+            }
+        }
+    }
 }
