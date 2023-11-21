@@ -55,7 +55,7 @@ func (app *App) ConfigureRoutes() {
 		v1.GET(constants.PingBasePath, app.HealthController.GetPing)
 
 		// // Notification
-		v1.POST(constants.NotificationBasePath, app.NotificationController.SendEmail)
+		v1.POST(constants.NotificationBasePath+"/:type", app.NotificationController.SendEmail)
 	}
 }
 
