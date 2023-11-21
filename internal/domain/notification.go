@@ -1,10 +1,9 @@
-package gin_handlers
+package domain
 
 import (
-	"net/http"
+	"errors"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"golang.org/x/time/rate"
 )
 
@@ -14,9 +13,7 @@ type NotificationRateLimit struct {
 	marketingRateLimiter *rate.Limiter
 }
 
-func (nrl *NotificationRateLimit) RateLimit(ctx *gin.Context) {
-	param, _ := ctx.Params.Get("type")
-
+func (nrl NotificationRateLimit) RateLimit(param string) error {
 	// This variable is false by default to only allow news, status and marketing mails
 	allow := false
 	switch param {
@@ -29,11 +26,10 @@ func (nrl *NotificationRateLimit) RateLimit(ctx *gin.Context) {
 	}
 
 	if !allow {
-		ctx.Status(http.StatusTooManyRequests)
-		ctx.Abort()
+		return errors.New("error")
 	}
 
-	ctx.Next()
+	return nil
 }
 
 func NewNotificationRateLimit() *NotificationRateLimit {

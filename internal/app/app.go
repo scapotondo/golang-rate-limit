@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"golang-rate-limit/internal/constants"
+	"golang-rate-limit/internal/controller"
 	"golang-rate-limit/internal/logs"
+	"golang-rate-limit/internal/service"
 	"net/http"
 	"os"
 	"os/signal"
@@ -18,6 +20,10 @@ import (
 type App struct {
 	Engine Engine
 	Logger logs.Logger
+
+	HealthController       controller.Health
+	NotificationService    service.Notification
+	NotificationController controller.Notification
 }
 
 func (app *App) Setup() *App {
@@ -29,6 +35,10 @@ func (app *App) Setup() *App {
 
 func (app *App) injectDependencies() {
 	app.Logger.InfoWithoutContext("Inject dependencies")
+
+	app.HealthController = controller.NewHealth()
+	app.NotificationService = service.NewNotification()
+	app.NotificationController = controller.NewNotification(app.NotificationService)
 }
 
 func (app *App) ConfigureRoutes() {
@@ -40,6 +50,12 @@ func (app *App) ConfigureRoutes() {
 	{
 		// Swagger
 		v1.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+		// Health
+		v1.GET(constants.PingBasePath, app.HealthController.GetPing)
+
+		// Notification
+		v1.POST(constants.NotificationBasePath+"/:type", app.NotificationController.SendEmail)
 	}
 }
 

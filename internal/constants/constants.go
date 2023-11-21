@@ -9,4 +9,8 @@ const (
 	EnvLogLevel     = "LOG_LEVEL"
 	EnvLogStdOut    = "LOG_STDOUT"
 	EnvLogFormatter = "LOG_FORMATTER"
+
+	// Controllers
+	PingBasePath         = "ping"
+	NotificationBasePath = "notification"
 )
